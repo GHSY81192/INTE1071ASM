@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <form action="http://titan.csit.rmit.edu.au/~s3715210/assignment/server/login.php" method="POST">
+            Username:<input type="text" name="username" id="username">
+            <br/><br/>
+            Password:<input type="password" name="password" id="password">
+            <br/><br/>
+            <button type="submit" onclick="hash()">Submit to log in</button>
+        </form>
+        <script src="http://titan.csit.rmit.edu.au/~s3715210/assignment/client/js/sha256.js"></script>
+        <script type="text/javascript">
+            function hash(){
+                var password = document.getElementById("password").value;
+                var hash = SHA256.hash(password);
+                document.getElementById("password").value = hash;
+            }
+        </script>
+    </body>
+</html>
