@@ -1,0 +1,29 @@
+<html>
+<body oncontextmenu="event.returnValue=false" onselectstart="event.returnValue=false">
+    <form action="http://titan.csit.rmit.edu.au/~s3715210/assignment/server/register.php" method="POST" oninput="validate()">
+        Username:<input type="text" name="username" id="username"><br/><br/>
+        Password:<input type="password" name="password" id="password"><br/><br/>
+        <button id="submit" type="submit" onclick = "hash()" disabled>At least 6 characters of passwords required!</button>
+    </form> 
+    <!-- refer to the js file, which contains sha256 hash function-->
+    <script src="http://titan.csit.rmit.edu.au/~s3715210/assignment/client/js/sha256.js"></script>
+    <script type="text/javascript">
+        function hash(){
+            var password = document.getElementById("password").value;
+            var hash = SHA256.hash(password);
+            document.getElementById("password").value = hash;
+        }
+        
+        function validate(){
+            password = document.getElementById("password").value;
+            if(password.length<6){
+                document.getElementById("submit").disabled = true;
+                document.getElementById("submit").innerHTML= "Please enter at least 6 characters password";
+            }else{
+                document.getElementById("submit").disabled = false;
+                document.getElementById("submit").innerHTML= "Register";
+            }
+        }
+    </script>
+    </body>
+</html>

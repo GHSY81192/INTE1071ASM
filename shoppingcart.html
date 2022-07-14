@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <script  type="text/javascript" src="http://titan.csit.rmit.edu.au/~s3715210/assignment/client/js/rsa.js"></script>
+        <script type="text/javascript" src="http://titan.csit.rmit.edu.au/~s3715210/assignment/client/js/des.js"></script>
+        <script type="text/javascript">
+            function calcResult() {
+                var Leclerc=document.getElementById('Leclerc').value;
+                var Leopard2A5=document.getElementById('Leopard2A5').value;
+                var CM11=document.getElementById('CM11').value;
+                var M1=document.getElementById('M1').value;
+                var T80U=document.getElementById('T80U').value;
+                var Type90=document.getElementById('Type90').value;
+                
+                var Quantity=Leclerc*1+Leopard2A5*1+CM11*1+M1*1+T80U*1+Type90*1;
+                document.getElementById("Quantity").innerHTML = Quantity;
+                
+                var priceLeclerc=390000;
+                var priceLeopard2A5=390000;
+                var priceCM11=250000;
+                var priceM1=390000;
+                var priceT80U=390000;
+                var priceType90=390000;
+                
+                var SubtotalLeclerc=Leclerc*priceLeclerc;
+                document.getElementById("SubtotalLeclerc").innerHTML=SubtotalLeclerc;
+                
+                var SubtotalLeopard2A5=Leopard2A5*priceLeopard2A5;
+                document.getElementById("SubtotalLeopard2A5").innerHTML=SubtotalLeopard2A5;
+                    
+                var SubtotalCM11=CM11*priceCM11;
+                document.getElementById("SubtotalCM11").innerHTML=SubtotalCM11;
+                
+                var SubtotalM1=M1*priceM1;
+                document.getElementById("SubtotalM1").innerHTML=SubtotalM1;
+                
+                var SubtotalT80U=T80U*priceT80U;
+                document.getElementById("SubtotalT80U").innerHTML=SubtotalT80U;
+                
+                var SubtotalType90=Type90*priceType90;
+                document.getElementById("SubtotalType90").innerHTML=SubtotalType90;
+
+                var SubtotalResult= SubtotalLeclerc*1+SubtotalLeopard2A5*1+SubtotalCM11*1+SubtotalM1*1+SubtotalT80U*1+SubtotalType90*1;
+                document.getElementById("SubtotalResult").innerHTML=SubtotalResult;
+                }
+                
+                function Encryption() {
+                var message = document.getElementById("CCN").value;
+                var DES_Encryption_Key = document.getElementById("DES_Encryption_Key").value;
+                var message_encrypted = javascript_des_encryption(DES_Encryption_Key, message);
+                document.getElementById("CCN").innerHTML = message_encrypted;
+                document.getElementById("CCN").value = message_encrypted;
+
+                var pubilc_key = "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzdxaei6bt/xIAhYsdFdW62CGTpRX+GXoZkzqvbf5oOxw4wKENjFX7LsqZXxdFfoRxEwH90zZHLHgsNFzXe3JqiRabIDcNZmKS2F0A7+Mwrx6K2fZ5b7E2fSLFbC7FsvL22mN0KNAp35tdADpl4lKqNFuF7NT22ZBp/X3ncod8cDvMb9tl0hiQ1hJv0H8My/31w+F+Cdat/9Ja5d1ztOOYIx1mZ2FD2m2M33/BgGY/BusUKqSk9W91Eh99+tHS5oTvE8CI8g7pvhQteqmVgBbJOa73eQhZfOQJ0aWQ5m2i0NUPcmwvGDzURXTKW+72UKDz671bE7YAch2H+U7UQeawwIDAQAB-----END PUBLICKEY-----";
+                var encrypt = new JSEncrypt();
+                encrypt.setPublicKey(pubilc_key);
+                var key_encrypted = encrypt.encrypt(DES_Encryption_Key);
+                document.getElementById("DES_Encryption_Key").innerHTML = key_encrypted;
+                document.getElementById("DES_Encryption_Key").value = key_encrypted;
+            }
+        </script>
+    </head>
+    
+    <BODY>
+        <style type="text/css">
+            body{
+                padding: 2%;
+                margin: 2%;
+            }
+            
+            h1{
+                font-family:arial;
+                color:black;
+                font-size:20px;
+            }
+            
+            th{
+                background-color: chartreuse;
+                font-size: 18px;
+            }
+            
+            table, input{
+                border-collapse: collapse;
+                text-align: center;
+            }
+            
+            th, td,tr{
+                width: 300px;
+            }
+        </style>
+        
+        <h1>Shopping Cart</h1><br>
+        <FORM ACTION="http://titan.csit.rmit.edu.au/~s3715210/assignment/server/shoppingcart.php" method="POST">
+            <table border="1">
+                <tr>
+                    <th>Products</th>
+                    <th>Price (Sliver Eagle)</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+                
+                <tr>
+                        <td>Leclerc<br><img src="http://titan.csit.rmit.edu.au/~s3715210/assignment/image/Leclerc.jpg" width="200" height="100"></td>
+                        <td>390,000</td>
+                        <td> <input type="number" id="Leclerc"name="Leclerc" min=0 value="0" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                        <td><div type="text" id="SubtotalLeclerc"name="SubtotalLeclerc"></div></td>
+                </tr>
+                
+                <tr>
+                        <td>Leopard 2A5<br><img src="http://titan.csit.rmit.edu.au/~s3715210/assignment/image/leopard2a5.jpg" width="200" height="100"></td>
+                        <td>390,000</td>
+                        <td> <input type="number" id="Leopard2A5"name="Leopard2A5" min=0 value="0" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                        <td><div type="text" id="SubtotalLeopard2A5"name="SubtotalLeopard2A5"></div></td>
+                </tr>
+                    
+                <tr>
+                        <td>CM11<br><img src="http://titan.csit.rmit.edu.au/~s3715210/assignment/image/cm11.jpg" width="200" height="100"></td>
+                        <td>250,000</td>
+                        <td> <input type="number" id="CM11"name="CM11" min=0 value="0" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                        <td><div type="text" id="SubtotalCM11"name="SubtotalCM11"></div></td>
+                </tr>
+                
+                <tr>
+                        <td>M1A1<br><img src="http://titan.csit.rmit.edu.au/~s3715210/assignment/image/m1a1.jpg" width="200" height="100"></td>
+                        <td>390,000</td>
+                        <td> <input type="number" id="M1"name="M1" min=0 value="0" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                        <td><div type="text" id="SubtotalM1"name="SubtotalM1"></div></td>
+                </tr>
+                
+                <tr>
+                        <td>T80U<br><img src="http://titan.csit.rmit.edu.au/~s3715210/assignment/image/t80u.jpg" width="200" height="100"></td>
+                        <td>390,000</td>
+                        <td> <input type="number" id="T80U"name="T80U" min=0 value="0" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                        <td><div type="text" id="SubtotalT80U"name="SubtotalT80U"></div></td>
+                </tr>
+                
+                <tr>
+                        <td>Type90<br><img src="http://titan.csit.rmit.edu.au/~s3715210/assignment/image/type90.jpg" width="200" height="100"></td>
+                        <td>390,000</td>
+                        <td> <input type="number" id="Type90"name="Type90" min=0 value="0" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                        <td><div type="text" id="SubtotalType90"name="SubtotalType90"></div></td>
+                </tr>
+                
+                <tr>
+                        <th>Custmoer Detail</th>
+                        <th>           </th>
+                        <th>           </th>
+                        <th>           </th>
+                </tr>
+                
+                <tr>
+                        <td>Credit Card Number:</td>
+                        <td>           </td>
+                        <td>           </td>
+                        <td><input type="integer" id="CCN" name="CCN"></td>
+                </tr>
+                
+                <tr>
+                        <td>Enter the encryption key:</td>
+                        <td>           </td>
+                        <td>           </td>
+                        <td><input id="DES_Encryption_Key" name="DES_Encryption_Key" type="text"></td>
+                </tr>
+                
+                <tr>
+                        <th>           </th>
+                        <th>Total</th>
+                        <th><div id="Quantity"></div></th>
+                        <th><div id="SubtotalResult"></div></th>
+                </tr>
+            </table>
+            <button type="button"onclick="calcResult()">Update</button>
+            <INPUT TYPE="SUBMIT" VALUE="Submit"  onclick="Encryption()"></INPUT>
+        </FORM>
+        <h4>Special Acknowledgement: </h4><p>All images from </p><a href="https://warthunder.com/au">Warthunder</a>
+    </BODY>
+</html>
